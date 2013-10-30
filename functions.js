@@ -1,7 +1,8 @@
 
-//I need to test this, but it should get data from a php page without 
-//refreshing the page a user is on
-function getData(div, phpPage){
+
+//gets information from website parameter and displays it in the 
+//docID field on the html page
+function ajaxData(docID, website){
 		if(window.XMLHttpRequest){
 			xmlhttp = new XMLHttpRequest();
 		}else{
@@ -9,12 +10,12 @@ function getData(div, phpPage){
 		}
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			document.getElementById(''+div).innerHTML = xmlhttp.responseText;
+			document.getElementById(""+ docID).innerHTML = xmlhttp.responseText;
 			}
 		};
-		document.getElementById(''+div).innerHTML = "";
+		document.getElementById(""+docID).innerHTML = "";
 
-		xmlhttp.open('GET', ''+phpPage, true);
+		xmlhttp.open('GET', ""+website, true);
 	
 		xmlhttp.send();
 }

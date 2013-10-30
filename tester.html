@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head>      <title>My Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
+	<script src="jquery-1.10.2.min.js"></script>
+	<script src="jquery.mobile-1.3.2"></script>
+	<script src="jquery.validate.min.js"></script>
+	<script src="functions.js"></script>  
+
+	<script>
+		$(document).ready(function(){
+			$("#datastuff2").hide();
+			$("#flip").click(function(){
+				$("#datastuff").slideToggle("fast");
+				$("#datastuff2").slideToggle("fast");
+			});
+		});
+	</script>
+
+
+	
+</head><body><div data-role="page">
+	
+	<div data-role="header">
+		<h1>Tech Library</h1>
+	</div>
+
+	<div data-role="content">
+		<div id="test" class="ui-grid-b">
+					<div class="ui-block-a">
+						<a href="javascript:ajaxData('here1', 'add_item.php')" data-role="button" data-mini="true">Add Item</a>
+						<p id="here1">
+						</p>
+					</div>
+					<div class="ui-block-b">
+						<a href="javascript:ajaxData('here2', 'add_item.php')" data-role="button" data-mini="true">Random2</a>
+						<p id="here2">
+						</p>
+					</div>
+					<div class="ui-block-c">
+						<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
+						<p id="here3">
+						</p>
+					</div>
+		</div>
+		<div>
+		</div>
+
+		<div id="flip" data-role="button" data-inline="true">Click to see data scrolllllll</div>
+		<div id="datastuff">Stuff stuff stuff</div>
+		<div id="datastuff2">Stuff stuff more stuff</div>
+
+
+	</div>
+</div>
+</body>
+</html>

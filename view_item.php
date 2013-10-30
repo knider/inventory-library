@@ -13,7 +13,7 @@ if($mysqli->connect_errno){
 		$stmt->store_result();
 		$stmt->bind_result($info,$itemName,$os,$type,$status,$itemNumber);
 		while($stmt->fetch()){
-			echo "<li><a href=item.html?itemname=".$itemName.">".$itemName."</a></li>";
+			echo $itemName;
 		}
 	}
 ?>

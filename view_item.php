@@ -5,3 +5,9 @@ if($mysqli->connect_errno){
 	echo"Connection Error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 }
 ?>
+
+<?php
+
+echo "hello world";
+
+?>

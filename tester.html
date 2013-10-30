@@ -7,18 +7,26 @@
 	<script src="functions.js"></script>  
 
 	<script>
+	/*
 		$(document).ready(function(){
 			$("#datastuff2").hide();
 			$("#flip").click(function(){
 				$("#datastuff").slideToggle("fast");
 				$("#datastuff2").slideToggle("fast");
 			});
-		});
+		});*/
+
+	function addToSearch(){
+		var data = ajaxData("searchdiv", "view_item.php");
+		$("#searchdiv").append(data);
+	}
+
+	$(document).bind('pageinit', addToSearch);
 	</script>
 
 
 	
-</head><body><div data-role="page">
+</head><body><div data-role="page" id="page1">
 	
 	<div data-role="header">
 		<h1>Tech Library</h1>
@@ -43,13 +51,13 @@
 					</div>
 		</div>
 		<div>
+
+			<ul data-role="listview"  data-inset="true" data-filter="true">
+				<div id="searchdiv">
+				</div>
+			</ul>
+
 		</div>
-
-		<div id="flip" data-role="button" data-inline="true">Click to see data scrolllllll</div>
-		<div id="datastuff">Stuff stuff stuff</div>
-		<div id="datastuff2">Stuff stuff more stuff</div>
-
-
 	</div>
 </div>
 </body>

@@ -19,3 +19,18 @@ function ajaxData(docID, website){
 	
 		xmlhttp.send();
 }
+
+function getAjax(pageDOM, website, newDOM){
+	//http://the-jquerymobile-tutorial.org/jquery-mobile-tutorial-CH11.php
+		$.ajax (
+		{ 
+  			url : ""+website, 
+  			complete : function (xhr, result)
+  		{
+   			if (result != "success") return;
+   	 		var response = xhr.responseText;
+   	 		$("#"+pageDOM+" div:jqmData(role=content)").append (response);
+   	 		$("#"+newDOM).listview ();
+ 		}
+	}); 
+}

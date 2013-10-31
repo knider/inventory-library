@@ -7,21 +7,8 @@
 	<script src="functions.js"></script>  
 
 	<script>
-	/*
-		$(document).ready(function(){
-			$("#datastuff2").hide();
-			$("#flip").click(function(){
-				$("#datastuff").slideToggle("fast");
-				$("#datastuff2").slideToggle("fast");
-			});
-		});*/
 
-	function addToSearch(){
-		var data = ajaxData("searchdiv", "view_item.php");
-		$("#searchdiv").append(data);
-	}
-
-	$(document).bind('pageinit', addToSearch);
+	$(document).on("pageinit", getAjax("page1", "view_item.php", "ulist"))
 	</script>
 
 
@@ -49,13 +36,8 @@
 						<p id="here3">
 						</p>
 					</div>
-		</div>
-		<div id ="searchdiv">
+		</div>		
 
-			<ul data-role="listview"  data-inset="true" data-filter="true">
-			</ul>
-
-		</div>
 	</div>
 </div>
 </body>

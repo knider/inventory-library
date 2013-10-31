@@ -12,8 +12,11 @@ if($mysqli->connect_errno){
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->bind_result($info,$itemName,$os,$type,$status,$itemNumber);
+   		$string = "<ul id='ulist' data-role='listview' data-inset='true' data-filter='true' >";
 		while($stmt->fetch()){
-			echo $itemName;
+			$string .= "<li><a href=item.html?itemname=".$itemName.">".$itemName."</a></li>";
 		}
+		$string .= "</ul>";
+		echo $string;
 	}
 ?>

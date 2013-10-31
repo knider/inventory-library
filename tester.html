@@ -7,29 +7,26 @@
 	<script src="functions.js"></script>  
 
 	<script>
-
-	$(document).on("pageinit", getAjax("page1", "view_item.php", "ulist"))
 	</script>
-
-
 	
 </head><body><div data-role="page" id="page1">
-	
+	<script>
+		$(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
+	</script>
+
 	<div data-role="header">
 		<h1>Tech Library</h1>
 	</div>
 
 	<div data-role="content">
-		<div id="test" class="ui-grid-b">
+		<div id="mainbuttons" class="ui-grid-b">
 					<div class="ui-block-a">
-						<a href="javascript:ajaxData('here1', 'add_item.php')" data-role="button" data-mini="true">Add Item</a>
+						<a href=="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
 						<p id="here1">
 						</p>
 					</div>
 					<div class="ui-block-b">
-						<a href="javascript:ajaxData('here2', 'add_item.php')" data-role="button" data-mini="true">Random2</a>
-						<p id="here2">
-						</p>
+						<a href="tester.html" data-role="button" data-mini="true">Home</a>
 					</div>
 					<div class="ui-block-c">
 						<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>

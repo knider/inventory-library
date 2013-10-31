@@ -8,6 +8,9 @@ if($mysqli->connect_errno){
 
 <?php
 	$itemNumber = $_GET["itemnumber"];
+	if($itemNumber === ""){
+		echo "Item number not in database";
+	}
 	if($stmt = $mysqli->prepare("select features, info,itemName,os,type,status from item where itemNumber = ?")){
 		$stmt->bind_param('s', $itemNumber);
 		$stmt->execute();
@@ -25,6 +28,6 @@ if($mysqli->connect_errno){
 			echo '<li>'.$features.'</li>';
 			echo '<li>'.$statusString.'</li>';
 		}
-
+		echo '</ul>';
 	}
 ?>

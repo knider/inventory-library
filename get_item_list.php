@@ -12,9 +12,25 @@ if($mysqli->connect_errno){
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->bind_result($info,$itemName,$os,$type,$status,$itemNumber);
-   		$string = "<ul id='ulist' data-theme='a' data-role='listview' data-inset='true' data-filter='true' >";
+		
+   		$string = "<ul id='ulist'  data-role='listview' data-inset='true' data-filter='true' data-filter-theme='a' data-filter-placeholder='Search for an Item'>";
 		while($stmt->fetch()){
-			$string .= "<li><a href=item.html?itemnumber=".$itemNumber.">".$itemName."</a></li>";
+		
+		if($status == 1){
+			$statusString = "Checked Out";
+			$statusColor = "#990000";
+		}else {
+			$statusString = "Available";
+			$statusColor = "#009900";
+		}
+
+			$string .= "<li><a style='color:".$statusColor."' href=item.html?itemnumber=".$itemNumber.">".$itemName."</a>";
+			$string .= "<p>".$info."</p>";
+			$string .= "<p>".$os."</p>";
+			$string .= "<p>".$type."</p>";
+			$string .= "<p>".$itemNumber."</p>";
+			$string .= "<p>".$statusString."</p>";
+			$string .= "</li>";
 		}
 		$string .= "</ul>";
 		echo $string;

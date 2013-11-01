@@ -13,9 +13,33 @@
 <body>
 <div data-role="page" id="page1">
 	<script>
+<<<<<<< HEAD
+	/*
+		$(document).ready(function(){
+			$("#datastuff2").hide();
+			$("#flip").click(function(){
+				$("#datastuff").slideToggle("fast");
+				$("#datastuff2").slideToggle("fast");
+			});
+		});*/
+
+	function addToSearch(){
+		var data = ajaxData("searchdiv", "view_item.php");
+		$("#searchdiv").append(data);
+	}
+
+	$(document).bind('pageinit', addToSearch);
+	</script>
+
+
+	
+</head><body><div data-role="page" id="page1">
+	
+=======
 		$(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
 	</script>
 
+>>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
 	<div data-role="header">
 		<h1>Tech Library</h1>
 	</div>
@@ -35,8 +59,17 @@
 						<p id="here3">
 						</p>
 					</div>
-		</div>		
+<<<<<<< HEAD
+		</div>
+		<div id ="searchdiv">
 
+			<ul data-role="listview"  data-inset="true" data-filter="true">
+			</ul>
+=======
+		</div>		
+>>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
+
+		</div>
 	</div>
 </div>
 </body>

@@ -1,76 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>      
-<title>CS419 Project</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="jquery.mobile-1.2.0.min.css"/>
-	<script src="jquery-1.10.2.min.js"></script>
-	<script src="jquery.mobile-1.3.2"></script>
-	<script src="jquery.validate.min.js"></script>
-	<script src="functions.js"></script>  
-</head>
+<!DOCTYPE html><html><head>      <title>My Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
+        <script src="jquery-1.10.2.min.js"></script>
+        <script src="jquery.mobile-1.3.2"></script>
+        <script src="jquery.validate.min.js"></script>
+        <script src="functions.js"></script>  
 
-<body>
-<div data-role="page" id="page1">
-	<script>
-<<<<<<< HEAD
-	/*
-		$(document).ready(function(){
-			$("#datastuff2").hide();
-			$("#flip").click(function(){
-				$("#datastuff").slideToggle("fast");
-				$("#datastuff2").slideToggle("fast");
-			});
-		});*/
-
-	function addToSearch(){
-		var data = ajaxData("searchdiv", "view_item.php");
-		$("#searchdiv").append(data);
-	}
-
-	$(document).bind('pageinit', addToSearch);
-	</script>
-
-
-	
+        
 </head><body><div data-role="page" id="page1">
-	
-=======
-		$(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
-	</script>
+        <script>
+                $(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
+        </script>
 
->>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
-	<div data-role="header">
-		<h1>Tech Library</h1>
-	</div>
+        <div data-role="header">
+                <h1>Tech Library</h1>
+        </div>
 
-	<div data-role="content">
-		<div id="mainbuttons" class="ui-grid-b">
-					<div class="ui-block-a">
-						<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
-						<p id="here1">
-						</p>
-					</div>
-					<div class="ui-block-b">
-						<a href="tester.html" data-role="button" data-mini="true">Home</a>
-					</div>
-					<div class="ui-block-c">
-						<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
-						<p id="here3">
-						</p>
-					</div>
-<<<<<<< HEAD
-		</div>
-		<div id ="searchdiv">
+        <div data-role="content">
+                <div id="mainbuttons" class="ui-grid-b">
+                                        <div class="ui-block-a">
+                                                <a href=="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
+                                                <p id="here1">
+                                                </p>
+                                        </div>
+                                        <div class="ui-block-b">
+                                                <a href="tester.html" data-role="button" data-mini="true">Home</a>
+                                        </div>
+                                        <div class="ui-block-c">
+                                                <a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
+                                                <p id="here3">
+                                                </p>
+                                        </div>
+                </div>                
 
-			<ul data-role="listview"  data-inset="true" data-filter="true">
-			</ul>
-=======
-		</div>		
->>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
-
-		</div>
-	</div>
+        </div>
 </div>
 </body>
 </html>

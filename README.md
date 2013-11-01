@@ -3,6 +3,12 @@ cs419-project
 
 Item Checkout for cs 419 - file descriptions
 
+add_borrower.php
+-called by ??.html, adds new borrower to the borrower database
+
+add_item.php
+-called by ??.html, adds new item to the item database
+
 functions.js
 -List of useful javascript functions
 

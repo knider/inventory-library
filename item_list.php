@@ -8,12 +8,7 @@ if($mysqli->connect_errno){
 
 <?php
 
-	if($stmt = $mysqli->prepare("select info,itemName,os,type,status,itemNumber from item")){
-		$stmt->execute();
-		$stmt->store_result();
-		$stmt->bind_result($info,$itemName,$os,$type,$status,$itemNumber);
-		while($stmt->fetch()){
-			echo $itemName;
-		}
-	}
+
+
+
 ?>

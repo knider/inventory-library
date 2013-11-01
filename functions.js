@@ -22,6 +22,7 @@ function ajaxData(docID, website){
 		xmlhttp.send();
 }
 
+//specific code for creating the listview
 function getAjax(pageDOM, website, newDOM){
 	//http://the-jquerymobile-tutorial.org/jquery-mobile-tutorial-CH11.php
 

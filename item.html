@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>      
-<title>CS419 Project</title>
+<title>CS419 Project | View Items</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="jquery.mobile-1.2.0.min.css"/>
 	<script src="jquery-1.10.2.min.js"></script>
@@ -9,39 +9,20 @@
 	<script src="jquery.validate.min.js"></script>
 	<script src="functions.js"></script>  
 </head>
-
-<body>
-<div data-role="page" id="page1">
-	<script>
-<<<<<<< HEAD
-	/*
-		$(document).ready(function(){
-			$("#datastuff2").hide();
-			$("#flip").click(function(){
-				$("#datastuff").slideToggle("fast");
-				$("#datastuff2").slideToggle("fast");
-			});
-		});*/
-
-	function addToSearch(){
-		var data = ajaxData("searchdiv", "view_item.php");
-		$("#searchdiv").append(data);
-	}
-
-	$(document).bind('pageinit', addToSearch);
-	</script>
-
-
 	
+
 </head><body><div data-role="page" id="page1">
-	
-=======
-		$(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
+	<script>
+	function getItemData(){
+			var get = getUrlVars()["itemnumber"];
+			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
+		}
+		$(document).on("pagechange", getItemData);
 	</script>
+	
 
->>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
 	<div data-role="header">
-		<h1>Tech Library</h1>
+		<h1>View Item</h1>
 	</div>
 
 	<div data-role="content">
@@ -59,17 +40,8 @@
 						<p id="here3">
 						</p>
 					</div>
-<<<<<<< HEAD
-		</div>
-		<div id ="searchdiv">
-
-			<ul data-role="listview"  data-inset="true" data-filter="true">
-			</ul>
-=======
 		</div>		
->>>>>>> 190f6024cd5f1f269a283298b24f4ba34baa3828
-
-		</div>
+		<div id="itemdata"></div>
 	</div>
 </div>
 </body>

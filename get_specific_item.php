@@ -19,14 +19,14 @@ if($mysqli->connect_errno){
 		if($status == 1){
 			$statusString = "Checked Out";
 		}else $statusString = "Available";
-		echo '<ul data-role="listview">';
+		echo '<ul>';
 		while($stmt->fetch()){
-			echo '<li>'.$itemName.'</li>';
-			echo '<li>'.$itemNumber.'</li>';
-			echo '<li>'.$info.'</li>';
-			echo '<li>'.$os.'</li>';
-			echo '<li>'.$features.'</li>';
-			echo '<li>'.$statusString.'</li>';
+			echo '<p> Item Name: '.$itemName.'</p>';
+			echo '<p> Item Number: '.$itemNumber.'</p>';
+			echo '<p> Information: '.$info.'</p>';
+			echo '<p> Operating System: '.$os.'</p>';
+			echo '<p> Special Features: '.$features.'</p>';
+			echo '<p> Current Status: '.$statusString.'</p>';
 		}
 		echo '</ul>';
 	}

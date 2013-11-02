@@ -12,7 +12,8 @@ function ajaxData(docID, website){
 		}
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-			document.getElementById(""+ docID).innerHTML = xmlhttp.responseText;
+			//document.getElementById(""+ docID).innerHTML = xmlhttp.responseText;
+			$("#"+docID).html(xmlhttp.responseText);
 			}
 		};
 		document.getElementById(""+docID).innerHTML = "";
@@ -25,11 +26,6 @@ function ajaxData(docID, website){
 //specific code for creating the listview
 function getAjax(pageDOM, website, newDOM){
 	//http://the-jquerymobile-tutorial.org/jquery-mobile-tutorial-CH11.php
-
-		if($("#"+pageDOM).innerHTML != ""){
-			$("#"+pageDOM).innerHTML = "";
-		}
-
 		$.ajax (
 		{ 
   			url : ""+website, 
@@ -37,14 +33,14 @@ function getAjax(pageDOM, website, newDOM){
   		{
    			if (result != "success") return;
    	 		var response = xhr.responseText;
-   	 		$("#"+pageDOM+" div:jqmData(role=content)").append (response);
-   	 		$("#"+newDOM).listview ();
+   	 		$("#"+pageDOM+" div:jqmData(role=content)").append(response);
+   	 		$("#"+newDOM).listview();
  		}
 	}); 
 }
 
-//called after searching for an item and clicking
 
+//function gets the GET_ variables from the url
 //http://snipplr.com/view/19838/get-url-parameters/
 function getUrlVars() {
 	var map = {};

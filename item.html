@@ -3,11 +3,12 @@
 <head>      
 <title>CS419 Project | View Items</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="themes/cs419.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
 	<script src="jquery.mobile.popup.css"></script>
 
 	<script src="jquery-1.10.2.min.js"></script>
-	<script src="jquery.mobile-1.3.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 	<script src="jquery.validate.min.js"></script>
 	<script src="functions.js"></script>  
 	
@@ -21,21 +22,25 @@
 	}
 	</script>
 
-</head><body><div data-role="page" id="page2">
+</head><body><div data-role="page" id="page2" data-theme="a">
 	
-	<script>
-	function getItemData(){
-			var get = getUrlVars()["itemnumber"];
-			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
-		}
-			$(document).on("pagechange", getItemData);			
-	</script>
 
 	<div data-role="header">
 		<h1>View Item</h1>
 	</div>
 
 	<div data-role="content">
+	<script>
+	function getItemData(){
+			var get = getUrlVars()["itemnumber"];
+			if(get == null){
+				window.location = "tester.html";
+			}
+			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
+		}
+			$(document).on("pagechange", getItemData);			
+	</script>
+
 		<div id="mainbuttons" class="ui-grid-b">
 					<div class="ui-block-a">
 						<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
@@ -65,7 +70,7 @@
 				
 				<div data-role="popup" id="popupBasic">
 					<h3>Checkout Form Here</h3>
-					<form method="post" action="">
+					<form method="post" action="checkout_item.php" >
 						User: <input type="text" id="username">
 						Password: <input type="password" id="password">
 						<input type="submit" value="submit">
@@ -73,14 +78,15 @@
 				</div>
 				
 				<script>
-				$("#flipswitch").change(function(){
+				$("#switch").change(function(){
 					var val = $("#switch").val();
 					if(val == "OUT"){
 						$("#popupBasic").popup("open");
 					}else{
 						alert("Checked In the Item");
+						window.location= "tester.html";
 						}
-					
+
 				});
 				</script>
 

@@ -1,13 +1,16 @@
 <!DOCTYPE html><html><head>      <title>My Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
+        <link rel="stylesheet" href="themes/cs419.min.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
+        <script src="jquery.mobile.popup.css"></script>
+
         <script src="jquery-1.10.2.min.js"></script>
-        <script src="jquery.mobile-1.3.2"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
         <script src="jquery.validate.min.js"></script>
         <script src="functions.js"></script>  
 
         
-</head><body><div data-role="page" id="page1">
+</head><body><div data-role="page" id="page1" data-theme="a">
         <script>
                 $(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
         </script>
@@ -16,7 +19,7 @@
                 <h1>Tech Library</h1>
         </div>
 
-        <div data-role="content">
+        <div data-role="content" data-theme="a">
                 <div id="mainbuttons" class="ui-grid-b">
                                         <div class="ui-block-a">
                                                 <a href=="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>

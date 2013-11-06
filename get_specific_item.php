@@ -21,12 +21,12 @@ if($mysqli->connect_errno){
 		}else $statusString = "Available";
 		echo '<ul>';
 		while($stmt->fetch()){
-			echo '<p> Item Name: '.$itemName.'</p>';
-			echo '<p> Item Number: '.$itemNumber.'</p>';
-			echo '<p> Information: '.$info.'</p>';
-			echo '<p> Operating System: '.$os.'</p>';
-			echo '<p> Special Features: '.$features.'</p>';
-			echo '<p> Current Status: '.$statusString.'</p>';
+			echo '<p>'.$itemName.'</p>';
+			echo '<p>'.$itemNumber.'</p>';
+			echo '<p>'.$info.'</p>';
+			echo '<p>'.$os.'</p>';
+			echo '<p>'.$features.'</p>';
+			echo '<p>'.$statusString.'</p>';
 		}
 		echo '</ul>';
 	}

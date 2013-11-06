@@ -18,7 +18,9 @@ if($mysqli->connect_errno){
 		$stmt->bind_result($features, $info,$itemName,$os,$type,$status);
 		if($status == 1){
 			$statusString = "Checked Out";
-		}else $statusString = "Available";
+		}else {
+			$statusString = "Available";
+		}
 		echo '<ul>';
 		while($stmt->fetch()){
 			echo '<p>'.$itemName.'</p>';

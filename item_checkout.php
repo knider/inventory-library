@@ -8,8 +8,9 @@ if($mysqli->connect_errno){
 
 <?php
 
-$itemNumber = $_POST["itemnumber"];
-	if($stmt = $mysqli->prepare("update item set status=1 where id=(select id from item where itemNumber=?)")){
+$itemNumber = $_POST["itemnum"];
+//$name = $_POST["name"];
+	if($stmt = $mysqli->prepare("update item set status=1 where itemNumber= ?")){
 		$stmt->bind_param('s', $itemNumber);
 		$stmt->execute();
 	}

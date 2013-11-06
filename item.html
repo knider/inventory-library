@@ -33,12 +33,15 @@
 	<script>
 	function getItemData(){
 			var get = getUrlVars()["itemnumber"];
+			$("#itemnum").val(get);
+			$("#itemnum2").val(get);
 			if(get == null){
 				window.location = "tester.html";
 			}
 			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
 		}
-			$(document).on("pagechange", getItemData);			
+		$(document).on("pagechange", getItemData);			
+		$(document).on("pageinit", ajaxData("ajaxForm","borrower_list.php"));			
 	</script>
 
 		<div id="mainbuttons" class="ui-grid-b">
@@ -68,13 +71,26 @@
 					<option value="OUT">Out</option>
 				</select>
 				
+				
+				
 				<div data-role="popup" id="popupBasic">
 					<h3>Checkout Form Here</h3>
-					<form method="post" action="checkout_item.php" >
-						User: <input type="text" id="username">
-						Password: <input type="password" id="password">
-						<input type="submit" value="submit">
-					</form>
+					<div>
+						<form action="item_checkout.php" method="POST">
+						<div id="ajaxForm"></div>
+						<input type="hidden" name="itemnum" id="itemnum">
+						</form>
+					</div>
+				</div>
+
+				<div data-role="popup" id="checkinPopup">
+					<h3>Checkout IN</h3>
+					<div>
+						<form action="item_checkin.php" method="POST">
+						<input type="hidden" name="itemnum" id="itemnum2">
+						<input type="submit" value="Check In">
+						</form>
+					</div>
 				</div>
 				
 				<script>
@@ -83,8 +99,8 @@
 					if(val == "OUT"){
 						$("#popupBasic").popup("open");
 					}else{
-						alert("Checked In the Item");
-						window.location= "tester.html";
+						$("#checkinPopup").popup("open");
+						//window.location= "tester.html";
 						}
 
 				});

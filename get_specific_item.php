@@ -18,15 +18,17 @@ if($mysqli->connect_errno){
 		$stmt->bind_result($features, $info,$itemName,$os,$type,$status);
 		if($status == 1){
 			$statusString = "Checked Out";
-		}else $statusString = "Available";
-		echo '<ul data-role="listview">';
+		}else {
+			$statusString = "Available";
+		}
+		echo '<ul>';
 		while($stmt->fetch()){
-			echo '<li>'.$itemName.'</li>';
-			echo '<li>'.$itemNumber.'</li>';
-			echo '<li>'.$info.'</li>';
-			echo '<li>'.$os.'</li>';
-			echo '<li>'.$features.'</li>';
-			echo '<li>'.$statusString.'</li>';
+			echo '<p>'.$itemName.'</p>';
+			echo '<p>'.$itemNumber.'</p>';
+			echo '<p>'.$info.'</p>';
+			echo '<p>'.$os.'</p>';
+			echo '<p>'.$features.'</p>';
+			echo '<p>'.$statusString.'</p>';
 		}
 		echo '</ul>';
 	}

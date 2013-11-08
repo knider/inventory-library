@@ -3,22 +3,26 @@
 <head>      
 <title>CS419 Project | View Items</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="jquery.mobile-1.2.0.min.css"/>
+    <link rel="stylesheet" href="themes/cs419.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
+	<script src="jquery.mobile.popup.css"></script>
+
 	<script src="jquery-1.10.2.min.js"></script>
-	<script src="jquery.mobile-1.3.2"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 	<script src="jquery.validate.min.js"></script>
 	<script src="functions.js"></script>  
-</head>
 	
-
-</head><body><div data-role="page" id="page1">
 	<script>
-	function getItemData(){
-			var get = getUrlVars()["itemnumber"];
-			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
+	function setSwitch(val){
+		if(val == "IN"){
+			$("#switch").val('IN');
+		}else{
+			$("#switch").val('OUT');
 		}
-		$(document).on("pagechange", getItemData);
+	}
 	</script>
+
+</head><body><div data-role="page" id="page2" data-theme="a">
 	
 
 	<div data-role="header">
@@ -26,6 +30,20 @@
 	</div>
 
 	<div data-role="content">
+	<script>
+	function getItemData(){
+			var get = getUrlVars()["itemnumber"];
+			$("#itemnum").val(get);
+			$("#itemnum2").val(get);
+			if(get == null){
+				window.location = "tester.html";
+			}
+			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
+		}
+		$(document).on("pagechange", getItemData);			
+		$(document).on("pageinit", ajaxData("ajaxForm","borrower_list.php"));			
+	</script>
+
 		<div id="mainbuttons" class="ui-grid-b">
 					<div class="ui-block-a">
 						<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
@@ -40,8 +58,58 @@
 						<p id="here3">
 						</p>
 					</div>
-		</div>		
-		<div id="itemdata"></div>
+		</div>
+
+		<div id="itemstuff" class="ui-grid-a">
+			<div id="itemdata" class="ui-block-a"></div>
+			
+			
+			<div id="flipswitch" class="ui-block-b">
+				<label for="flip-mini">Checked:</label>
+				<select id="switch" name="flip-mini" data-role="slider" data-mini="true">
+					<option value="IN">In</option>
+					<option value="OUT">Out</option>
+				</select>
+				
+				
+				
+				<div data-role="popup" id="popupBasic">
+					<h3>Checkout Form Here</h3>
+					<div>
+						<form action="item_checkout.php" method="POST">
+						<div id="ajaxForm"></div>
+						<input type="hidden" name="itemnum" id="itemnum">
+						</form>
+					</div>
+				</div>
+
+				<div data-role="popup" id="checkinPopup">
+					<h3>Checkout IN</h3>
+					<div>
+						<form action="item_checkin.php" method="POST">
+						<input type="hidden" name="itemnum" id="itemnum2">
+						<input type="submit" value="Check In">
+						</form>
+					</div>
+				</div>
+				
+				<script>
+				$("#switch").change(function(){
+					var val = $("#switch").val();
+					if(val == "OUT"){
+						$("#popupBasic").popup("open");
+					}else{
+						$("#checkinPopup").popup("open");
+						//window.location= "tester.html";
+						}
+
+				});
+				</script>
+
+			</div>
+		
+		</div>
+	
 	</div>
 </div>
 </body>

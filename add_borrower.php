@@ -15,7 +15,5 @@ $phone = $_POST["phone"];
 		$stmt->bind_param('ssss', $name, $email, $phone, $address);
 		$stmt->execute();
 	}
-echo '<script type="text/javascript">' . "\n"; 
-echo 'window.location="tester.html";';
-echo '</script>';  
+header('location:post-login.php');
 ?>

@@ -14,6 +14,13 @@
         <script>
                 $(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
         </script>
+        
+        <script language="javascript" type="text/javascript">
+        	//Popup window code
+        	function listPopup(url){
+        		popupWindow = window.open(url, 'popUpWindow', 'height=800, width=1000,left=1-,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+        	}
+        </script>
 
         <div data-role="header">
                 <h1>Tech Library</h1>
@@ -37,7 +44,7 @@
                 </div>                
                 <div id="secondary buttons" class="ui-grid-b">
                                         <div class="ui-block-a">
-                                                <a href=="/" data-role="button" data-mini="true">Item List</a>
+                                                <a href=="item_list.php" onclick="return listPopup('item_list.php')" data-role="button" data-mini="true">Item List</a>
                                                 <p id="here1">
                                                 </p>
                                         </div>

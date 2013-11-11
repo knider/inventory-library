@@ -55,10 +55,12 @@ if($mysqli->connect_errno){
 							if(!$stmt->bind_result($itemName, $features, $info, $itemNumber, $os, $status, $type)){
 								echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
 							}
-
 							while($stmt->fetch()){
+							if($status === 1){
+								$statusString = "Checked Out";
+							}else $statusString = "Available";
  								echo "<tr>\n<td>\n" . $itemName . "\n</td>\n<td>\n" . $features . "\n</td>\n<td>\n" . $info . "\n</td>\n<td>\n" 
- 								. $itemNumber  . "\n</td>\n<td>\n" . $os  . "\n</td>\n<td>\n" . $status  . "\n</td>\n<td>\n" . $type . "\n</td>\n</tr>";
+ 								. $itemNumber  . "\n</td>\n<td>\n" . $os  . "\n</td>\n<td>\n" . $statusString  . "\n</td>\n<td>\n" . $type . "\n</td>\n</tr>";
 							}	
 
 							$stmt->close();

@@ -32,6 +32,10 @@
 	<div data-role="content">
 	<script>
 	function getItemData(){
+			var status = getUrlVars()["status"];
+			if(status==1){
+			$("#switch").val("OUT").slider("refresh");			
+			}else $("#switch").val("IN").slider("refresh");
 			var get = getUrlVars()["itemnumber"];
 			$("#itemnum").val(get);
 			$("#itemnum2").val(get);

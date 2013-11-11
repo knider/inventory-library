@@ -8,10 +8,10 @@ if($mysqli->connect_errno){
 
 <?php
 
-	if($stmt = $mysqli->prepare("select info,itemName,os,type,status,itemNumber from item")){
+	if($stmt = $mysqli->prepare("select info,itemName,type,status,itemNumber,features from item")){
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($info,$itemName,$os,$type,$status,$itemNumber);
+		$stmt->bind_result($info,$itemName,$type,$status,$itemNumber,$features);
 		
    		$string = "<ul id='ulist'  data-role='listview' data-inset='true' data-filter='true' data-filter-theme='a' data-filter-placeholder='Search for an Item'>";
 		while($stmt->fetch()){
@@ -24,12 +24,10 @@ if($mysqli->connect_errno){
 			$statusColor = "#009900";
 		}
 
-			$string .= "<li><a style='color:".$statusColor."' href=item.html?itemnumber=".$itemNumber.">".$itemName."</a>";
+			$string .= "<li><a style='color:".$statusColor."' href=item.html?itemnumber=".$itemNumber."&status=".$status.">".$itemName."</a>";
 			$string .= "<p>".$info."</p>";
-			$string .= "<p>".$os."</p>";
 			$string .= "<p>".$type."</p>";
-			$string .= "<p>".$itemNumber."</p>";
-			$string .= "<p>".$statusString."</p>";
+			$string .= "<p>".$features."</p>";
 			$string .= "</li>";
 		}
 		$string .= "</ul>";

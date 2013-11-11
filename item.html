@@ -36,6 +36,8 @@
 			if(status==1){
 			$("#switch").val("OUT").slider("refresh");			
 			}else $("#switch").val("IN").slider("refresh");
+
+
 			var get = getUrlVars()["itemnumber"];
 			$("#itemnum").val(get);
 			$("#itemnum2").val(get);
@@ -88,7 +90,7 @@
 				</div>
 
 				<div data-role="popup" id="checkinPopup">
-					<h3>Checkout IN</h3>
+					<h3>CHECK IN</h3>
 					<div>
 						<form action="item_checkin.php" method="POST">
 						<input type="hidden" name="itemnum" id="itemnum2">
@@ -104,7 +106,6 @@
 						$("#popupBasic").popup("open");
 					}else{
 						$("#checkinPopup").popup("open");
-						//window.location= "tester.html";
 						}
 
 				});

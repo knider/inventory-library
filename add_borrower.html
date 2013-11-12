@@ -13,16 +13,20 @@
 	<script src="functions.js"></script>  
 </head>
 <body>
-<div data-role="page" id="page3" data-theme="a">
-	<div data-role="header"><h1>New Borrower</h1></div>
+<div data-role="page" id="page1" data-theme="a">
+	<div data-role="header"><h1>Add a New Borrower</h1></div>
 	
 	<div data-role="content" data-theme="a">
-		<div id="mainbuttons" class="ui-grid-a">
+		<div id="mainbuttons" class="ui-grid-b">
 			<div class="ui-block-a">
 				<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
 			<div class="ui-block-b"><a href="tester.html" data-role="button" data-mini="true">Home</a>
+			</div>
+			<div class="ui-block-c">
+				<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
+				<p id="here3"></p>
 			</div>
 		</div>
 

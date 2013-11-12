@@ -16,5 +16,5 @@
 	}
 	if ( !$stmt->execute() ) { echo "Execute failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 	
-	header('location:add_borrower.html');
+	header('location:tester.html');
 ?>

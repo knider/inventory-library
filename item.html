@@ -41,9 +41,6 @@
 			var get = getUrlVars()["itemnumber"];
 			$("#itemnum").val(get);
 			$("#itemnum2").val(get);
-			if(get == null){
-				window.location = "tester.html";
-			}
 			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
 		}
 		$(document).on("pagechange", getItemData);			
@@ -59,11 +56,11 @@
 					<div class="ui-block-b">
 						<a href="tester.html" data-role="button" data-mini="true">Home</a>
 					</div>
-					<div class="ui-block-c">
-						<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
-						<p id="here3">
-						</p>
-					</div>
+                    <div class="ui-block-c">
+                            <a href="add_borrower.html" data-role="button" data-mini="true">+ Borrower</a>
+                            <p id="here3">
+                            </p>
+                    </div>
 		</div>
 
 		<div id="itemstuff" class="ui-grid-a">

@@ -41,9 +41,9 @@
 			var get = getUrlVars()["itemnumber"];
 			$("#itemnum").val(get);
 			$("#itemnum2").val(get);
-			if(get == null){
-				window.location = "tester.html";
-			}
+			//if(get == null){
+			//	window.location = "tester.html";
+			//}
 			ajaxData("itemdata", "get_specific_item.php?itemnumber="+get);
 		}
 		$(document).on("pagechange", getItemData);			

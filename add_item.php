@@ -29,7 +29,7 @@
 	if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
 	
 	else {
-		header('location:tester.html');
+		header('location:index.html');
 		//echo "<p>Your item is added to Tech Library.</p>";
 		/* Need to change these lines later */ 		
 		//echo "<p><a href=\"main.php\">Go back to the previous page</a></p>"; 

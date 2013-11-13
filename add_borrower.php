@@ -16,5 +16,5 @@
 	}
 	if ( !$stmt->execute() ) { echo "Execute failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 	
-	header('location:tester.html');
+	header('location:index.html');
 ?>

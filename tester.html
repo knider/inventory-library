@@ -11,9 +11,6 @@
 
         
 </head><body><div data-role="page" id="page1" data-theme="a">
-        <script>
-                $(document).on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
-        </script>
         
         <script language="javascript" type="text/javascript">
         	//Popup window code
@@ -27,6 +24,9 @@
         </div>
 
         <div data-role="content" data-theme="a">
+        <script>
+        $("#page1").on("pagechange", getAjax("page1", "get_item_list.php", "ulist"))
+        </script>
                 <div id="mainbuttons" class="ui-grid-b">
                                         <div class="ui-block-a">
                                                 <a href=="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
@@ -49,7 +49,7 @@
                                                 </p>
                                         </div>
                                         <div class="ui-block-b">
-                                                <a href="" data-role="button" data-mini="true">History</a>
+                                                <a href="history.html" data-role="button" data-ajax="false" data-mini="true">History</a>
                                         </div>
                                         <div class="ui-block-c">
                                                 <a href="" data-role="button" data-mini="true">+ Item</a>

@@ -1,4 +1,5 @@
 <?php
+header("Location: tester.html");
 ini_set('display_errors', 'On');
 $mysqli = new mysqli("oniddb.cws.oregonstate.edu","starkst-db","e0Wm80emmSOBOQSD","starkst-db");
 if($mysqli->connect_errno){
@@ -9,7 +10,6 @@ if($mysqli->connect_errno){
 <?php
 
 $itemNumber = $_POST["itemnum"];
-//$name = $_POST["name"];
 	if($stmt = $mysqli->prepare("update item set status=0 where itemNumber= ?")){
 		$stmt->bind_param('s', $itemNumber);
 		$stmt->execute();

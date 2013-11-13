@@ -79,7 +79,7 @@
 				<div data-role="popup" id="popupBasic">
 					<h3>Checkout Form Here</h3>
 					<div>
-						<form action="item_checkout.php" method="POST">
+						<form action="item_checkout.php" method="POST" data-ajax="false">
 						<div id="ajaxForm"></div>
 						<input type="hidden" name="itemnum" id="itemnum">
 						</form>
@@ -89,7 +89,7 @@
 				<div data-role="popup" id="checkinPopup">
 					<h3>CHECK IN</h3>
 					<div>
-						<form action="item_checkin.php" method="POST">
+						<form action="item_checkin.php" method="POST" data-ajax="false">
 						<input type="hidden" name="itemnum" id="itemnum2">
 						<input type="submit" value="Check In">
 						</form>

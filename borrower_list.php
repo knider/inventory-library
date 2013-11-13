@@ -7,17 +7,15 @@ if($mysqli->connect_errno){
 ?>
 
 <?php
-	//$itemNumber = $_GET["itemnumber"];
 	if($stmt = $mysqli->prepare("select name from borrower")){
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->bind_result($name);
-		echo "<select>";
+		echo "<select name='name'>";
 		while($stmt->fetch()){
-			echo "<option value='name'>".$name."</option>";
+			echo "<option value='".$name."'>".$name."</option>";
 		}
 		echo "</select>";
-		//echo "<input type='text' value='".$itemNumber."' name='itemnumber'>";
 		echo "<input type='submit' value='check out' />";
 	}
 ?>

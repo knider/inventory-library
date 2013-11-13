@@ -23,7 +23,7 @@ if($mysqli->connect_errno){
 			thead{background:#fc9}
 		</style>
         
-</head><body><div data-role="page" id="page1" data-theme="a">
+</head><body><div data-role="page" id="page1" data-theme="a"5
         <script>
         </script>
 

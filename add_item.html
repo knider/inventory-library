@@ -17,16 +17,12 @@
 	<div data-role="header"><h1>Add a New Item</h1></div>
 	
 	<div data-role="content" data-theme="a">
-		<div id="mainbuttons" class="ui-grid-b">
+		<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
 				<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
-			<div class="ui-block-b"><a href="/" data-role="button" data-mini="true">Home</a>
-			</div>
-			<div class="ui-block-c">
-				<a href="javascript:ajaxData('here3', 'add_item.php')" data-role="button" data-mini="true">Random3</a>
-				<p id="here3"></p>
+			<div class="ui-block-b"><a href="index.html" data-ajax="false" data-role="button" data-mini="true">Home</a>
 			</div>
 		</div>
 		<script>
@@ -51,7 +47,7 @@
 		}
 		</script>
 		<div data-theme="a">
-			<form id="itemAddForm" method="post" action="add_item.php">
+			<form id="itemAddForm" method="post" action="add_item.php" data-ajax="false">
 				<h3>Please Enter the New Item's Information and Submit</h3><br>
 				<div><label for="itemNumber">Item Number: </label><input type="text" id="itemNumber" name="itemNumber" required /></div>
 				<div><label for="itemName">Name:</label><input type="text" id="itemName" name="itemName" required /></div>

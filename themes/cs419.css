@@ -794,3 +794,13 @@ a.ui-link-inherit {
 	outline-style: auto;
 }
 			
+/* additions */
+a.available > p:first-child
+{
+color: #009900;
+} 
+
+a.checked_out > p:first-child
+{
+color: #990000;
+} 

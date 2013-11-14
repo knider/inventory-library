@@ -1,31 +1,62 @@
 <?php
-ini_set('display_errors', 'On');
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","starkst-db","e0Wm80emmSOBOQSD","starkst-db");
-if($mysqli->connect_errno){
-	echo"Connection Error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
-}
-?>
 
-<?php
+	$title = "Item History";
+	include(dirname(__FILE__).'/loader.php');
+	
+	get_header();
+	
 	echo "
 	<style>
 		table {margin: 1em; border-collapse: collapse} 
 		th, td {padding:.3em;border:1px #ccc solid;text-align:left}
 		thead{background:#fc9}
 	</style>
-
 	";
 
+	
+	
+	
+?>
+<body><div data-role="page" id="page5" data-theme="a">
+	
+	<?php get_page_header(); ?>
 
+	<div data-role="content">
+		<!--<script>
+		function getHistory(){
+				ajaxData("historydata", "history.php");
+			}
+		$(document).on("pagechange", getHistory);			
+		</script>-->
 
-	if($stmt = $mysqli->prepare("select date,i.itemName,borrower_email from item_borrower ib left join item i on ib.item_id = i.id order by date")){
+		<?php get_menu(); ?>
+
+		<div id="itemstuff">
+			
+			<div id="historydata">
+			<?php
+			if($stmt = $mysqli->prepare("SELECT date, i.itemName, i.status, borrower_email ". 
+										"FROM item_borrower ib ".
+										"LEFT JOIN item i ON ib.item_id = i.id ".
+										"ORDER BY date DESC")){
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($date,$itemName,$email);
-		echo "<table><tr><td>Item Name</td><td>Borrower's Email</td><td>Date</td></tr>";
+		$stmt->bind_result($date,$itemName,$status,$email);
+		echo "<table><tr><td>Date</td><td>Item Name</td><td>Borrower</td><td>Status</td></tr>";
 		while($stmt->fetch()){
-			echo "<tr><td>".$itemName."</td><td>".$email."</td><td>".$date."</td><tr>";
+			$status_str = ($status) ? "Checked Out" : "Checked In";
+			$status_color = ($status) ? "#990000" : "#009900";
+			echo "<tr><td>".$date."</td><td>".$itemName."</td><td>".$email."</td><td style='color: ".$status_color." '>".$status_str."</td><tr>";
 		}
 		echo "</table>";
 	}
-?>
+			
+			?>
+			</div>
+		
+		</div>
+	
+	</div> <!-- /content -->
+</div> <!-- /page -->
+</body>
+</html>

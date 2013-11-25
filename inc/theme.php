@@ -35,8 +35,9 @@ function get_header(){
 
 function get_page_header(){
 	global $title;
+	global $subtitle;
 	$page_header = (!$title) ? SiteName : $title.' | '.SiteName;
-	echo '<div data-role="header"><h1>'.$page_header.'</h1></div>';
+	echo '<div data-role="header"><h1>'.$page_header.'</h1><h3>'.$subtitle.'</h3></div>';
 
 }
 	
@@ -46,7 +47,7 @@ function get_page_header(){
 	function get_menu(){
 		echo '<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
-				<a href="/" data-icon="back" data-role="button" data-rel="back" data-mini="true">Back</a>
+				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
 			<div class="ui-block-b"><a href="'.Home.'" data-role="button" data-mini="true">Home</a>

@@ -1,5 +1,13 @@
 <?php
+	session_start();
+	$email = $_SESSION['email'];
+	if(isset($_SESSION['email'])){
+	}
+	else{
+		header('Location: login.php?login=0');
+	}
 	$title = "";
+	$subtitle = $email;
 	include(dirname(__FILE__).'/loader.php');
 	
 	get_header();
@@ -20,7 +28,7 @@
 		<script>
         $("#page1").on("pagechange", getAjax("page1", "get_item_list.php", "ulist"));
         </script>
-		<div id="mainbuttons" class="ui-grid-a">
+		<div id="mainbuttons" class="ui-grid-b">
 			<div class="ui-block-a">
 					<a href="add_item.php" data-role="button" data-mini="true">+ Item</a>
 					<p id="here3">
@@ -29,6 +37,10 @@
 			<div class="ui-block-b">
 					<a href="add_borrower.php" data-role="button" data-mini="true">+ Borrower</a>
 					<p id="here3">
+					</p>
+			</div>
+			<div class="ui-block-c">
+					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>
 					</p>
 			</div>
 		</div>                

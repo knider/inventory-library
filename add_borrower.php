@@ -1,4 +1,12 @@
 <?php
+	session_start();
+	$email = $_SESSION['email'];
+	if(isset($_SESSION['email'])){
+	}
+	else{
+		header('Location: login.php?login=0');
+	}
+
 	$title = "Add Borrower";
 	include(dirname(__FILE__).'/loader.php');
 	

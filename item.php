@@ -5,7 +5,13 @@
 	*	File Name: item.php
 	*	Description: This will show the details of an item
 	*  ================================================================= */
- 
+	session_start();
+	$email = $_SESSION['email'];
+	if(isset($_SESSION['email'])){
+	}
+	else{
+		header('Location: login.php?login=0');
+	}
 	$title = "View Item";
 	include(dirname(__FILE__).'/loader.php');
 	

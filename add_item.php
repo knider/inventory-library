@@ -5,7 +5,13 @@
 	*	File Name: add_item.php
 	*	Description: This will add a new item to the item table
 	*  ================================================================= */
- 
+	session_start();
+	$email = $_SESSION['email'];
+	if(isset($_SESSION['email'])){
+	}
+	else{
+		header('Location: login.php?login=0');
+	}
 	$title = "Add Item";
 	include(dirname(__FILE__).'/loader.php');
 		

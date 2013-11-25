@@ -12,10 +12,10 @@ color: #990000;
 } 
 </style>";
 
-	if($stmt = $mysqli->prepare("select info,itemName,type,status,itemNumber,pages, os, features from item")){
+	if($stmt = $mysqli->prepare("SELECT id, info, itemName, type, status, itemNumber, pages, os, features FROM item ORDER BY id DESC")){
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($info,$itemName,$type,$status,$itemNumber, $pages, $os, $features);
+		$stmt->bind_result($item_id, $info,$itemName,$type,$status,$itemNumber, $pages, $os, $features);
 		
    		$string = "<ul id='ulist'  data-role='listview' data-inset='true' data-filter='true' data-filter-theme='a' data-filter-placeholder='Search for an Item'>";
 		while($stmt->fetch()){
@@ -30,7 +30,7 @@ color: #990000;
 			//$statusColor = "#009900";
 		}
 
-			$string .= "<li><a class='". $statusClass ."'  href=item.html?itemnumber=".$itemNumber."&status=".$status.">".$itemName;
+			$string .= "<li><a class='". $statusClass ."'  href=item.php?itemnumber=".$itemNumber."&status=".$status.">".$itemName;
 			$string .= "<p>Item #: ".$itemNumber."</p>";
 			$string .= (!$type) ? "" : "<p>Type: ".$type."</p>";
 			$string .= (!$pages) ? "" : "<p>Pages: ".$pages."</p>";

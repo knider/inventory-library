@@ -55,4 +55,19 @@ function get_page_header(){
 		</div>';
 	}
 	
+	function get_item_menu(){
+		echo '<div id="mainbuttons" class="ui-grid-b">
+			<div class="ui-block-a">
+				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
+				<p id="here1"></p>
+			</div>
+			<div class="ui-block-b"><a href="'.Home.'" data-role="button" data-mini="true">Home</a>
+			</div>
+			<div class="ui-block-c">
+				<a href="add_borrower.php" data-role="button" data-mini="true">+ Borrower</a>
+				<p id="here3"></p>
+			</div>
+		</div>';
+	}
+	
 ?>

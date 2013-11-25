@@ -130,7 +130,8 @@
 					<option value="OUT">Out</option>
 				</select>
 				
-				<div data-role="popup" id="popupBasic">
+				<div data-role="popup" id="popupBasic" class="ui-content" data-transition="flip">
+				<a href="index.php" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 					<h3>Check OUT:</h3>
 					<div>
 						<form action="item.php" method="POST" data-ajax="false">
@@ -142,7 +143,8 @@
 					</div>
 				</div>
 
-				<div data-role="popup" id="checkinPopup">
+				<div data-role="popup" id="checkinPopup" class="ui-content" data-transition="flip">
+				<a href="index.php" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 					<h3>CHECK IN?</h3>
 					<div>
 						<form action="item.php" method="POST" data-ajax="false">

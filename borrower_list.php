@@ -1,21 +1,15 @@
 <?php
-ini_set('display_errors', 'On');
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","starkst-db","e0Wm80emmSOBOQSD","starkst-db");
-if($mysqli->connect_errno){
-	echo"Connection Error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
-}
-?>
-
-<?php
-	if($stmt = $mysqli->prepare("select name from borrower")){
-		$stmt->execute();
+	include(dirname(__FILE__).'/loader.php');
+	
+	if (!($stmt = $mysqli->prepare("SELECT name FROM borrower"))) { echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error; }
+	if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
+	if (!$stmt->bind_result($name)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
+	else {
 		$stmt->store_result();
-		$stmt->bind_result($name);
-		echo "<select name='name'>";
+		$borrower_list = "<select name=\"borrower_name\">\n";
 		while($stmt->fetch()){
-			echo "<option value='".$name."'>".$name."</option>";
+			$borrower_list .= "<option value=\"" .$name. "\">" .$name. "</option>\n";
 		}
-		echo "</select>";
-		echo "<input type='submit' value='check out' />";
+		$borrower_list .= "</select>\n";
 	}
 ?>

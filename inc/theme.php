@@ -61,7 +61,7 @@ function get_page_header(){
 				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
-			<div class="ui-block-b"><a href="'.Home.'" data-role="button" data-mini="true">Home</a>
+			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
 			</div>
 			<div class="ui-block-c">
 				<a href="add_borrower.php" data-role="button" data-mini="true">+ Borrower</a>

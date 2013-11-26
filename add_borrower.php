@@ -1,15 +1,9 @@
 <?php
-	session_start();
-	$email = $_SESSION['email'];
-	if(isset($_SESSION['email'])){
-	}
-	else{
-		header('Location: login.php?login=0');
-	}
 
 	$title = "Add Borrower";
 	include(dirname(__FILE__).'/loader.php');
-	
+	check_session();
+
 	$name = array_key_exists("name", $_POST) ? $_POST["name"] : '';
 	$email = array_key_exists("email", $_POST) ? $_POST["email"] : '';
 	$address = array_key_exists("address", $_POST) ? $_POST["address"] : '';

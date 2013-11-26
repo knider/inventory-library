@@ -2,7 +2,7 @@
 
 	$title = "Item History";
 	include(dirname(__FILE__).'/loader.php');
-	
+	check_session();
 	get_header();
 	
 	echo "

@@ -33,6 +33,16 @@ function get_header(){
 	';
 }
 
+function check_session(){
+	session_start();
+	$email = $_SESSION['email'];
+	if(isset($_SESSION['email'])){
+	}
+	else{
+		header('Location: login.php?login=0');
+	}
+}
+
 function get_page_header(){
 	global $title;
 	global $subtitle;

@@ -5,16 +5,9 @@
 	*	File Name: item.php
 	*	Description: This will show the details of an item
 	*  ================================================================= */
-	session_start();
-	$email = $_SESSION['email'];
-	if(isset($_SESSION['email'])){
-	}
-	else{
-		header('Location: login.php?login=0');
-	}
-	$title = "View Item";
 	include(dirname(__FILE__).'/loader.php');
-	
+	check_session();
+
 	$itemNumber = array_key_exists("itemnum", $_POST) ? $_POST["itemnum"] : "";
 	
 	$form = array_key_exists("form", $_POST) ? $_POST["form"] : "";

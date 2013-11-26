@@ -1,8 +1,9 @@
 <?php
+	session_start();
 	$title = "";
-	$subtitle = $email;
 	include(dirname(__FILE__).'/loader.php');
 	check_session();
+	$subtitle = $_SESSION['email'];
 	get_header();
 ?>
 

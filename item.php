@@ -7,6 +7,7 @@
 	*  ================================================================= */
 	include(dirname(__FILE__).'/loader.php');
 	check_session();
+	$title = "View Item";
 
 	$itemNumber = array_key_exists("itemnum", $_POST) ? $_POST["itemnum"] : "";
 	
@@ -106,13 +107,21 @@
 	<div data-role="content" data-theme="a">
 		<script>
 		function getItemData(){
-				var status = <?php echo $status;?>;
-				if(status==1){
+			var status = <?php echo $status;?>;
+			if(status==1){
 				$("#switch").val("OUT").slider("refresh");			
-				}else $("#switch").val("IN").slider("refresh");
-			}
-			$(document).on("pagechange", getItemData);
-			//$(document).on("pageinit", ajaxData("ajaxForm","borrower_list.php"));			
+			} else $("#switch").val("IN").slider("refresh");
+		}
+		$(document).on("pagechange", getItemData);
+		
+		function closeout() {
+			$("#checkoutPopup").popup("close");
+			$("#switch").val("IN").slider("refresh");
+		}
+		function closein() {
+			$("#checkinPopup").popup("close");
+			$("#switch").val("OUT").slider("refresh");
+		}
 		</script>
 		
 		<?php get_item_menu(); ?>
@@ -129,26 +138,26 @@
 					<option value="OUT">Out</option>
 				</select>
 				
-				<div data-role="popup" id="popupBasic" class="ui-content" data-history="false" data-dismissible="false" data-transition="flip">
-				<a href="index.php" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="popup" id="checkoutPopup" class="ui-content" data-history="false" data-dismissible="false" data-transition="flip">
+					<a href="javascript: closeout()" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 					<h3>Check OUT:</h3>
 					<div>
-						<form action="item.php" method="POST" data-ajax="false">
-						<input type="hidden" name="itemnum" id="itemnum" value="<?php echo $itemNumber; ?>">
-						<input type="hidden" name="form" value="checkout">
+						<form action="item.php?itemnumber=<?php echo $itemNumber; ?>" method="POST" data-ajax="false">
+						<input type="hidden" name="itemnum" id="itemnum" value="<?php echo $itemNumber; ?>" />
+						<input type="hidden" name="form" value="checkout" />
 						<?php echo $borrower_list; ?>
-						<input type="submit" value="Check Out">
+						<input type="submit" value="Check Out" />
 						</form>
 					</div>
 				</div>
 
 				<div data-role="popup" id="checkinPopup" data-history="false" class="ui-content" data-dismissible="false" data-transition="flip">
-				<a href="index.php" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+					<a href="javascript: closein()" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 					<div>
-						<form action="item.php" method="POST" data-ajax="false">
-						<input type="hidden" name="itemnum" id="itemnum2" value="<?php echo $itemNumber; ?>">
-						<input type="hidden" name="form" value="checkin">
-						<input type="submit" value="Check In">
+						<form action="item.php?itemnumber=<?php echo $itemNumber; ?>" method="POST" data-ajax="false">
+						<input type="hidden" name="itemnum" id="itemnum2" value="<?php echo $itemNumber; ?> "/>
+						<input type="hidden" name="form" value="checkin" />
+						<input type="submit" value="Check In" />
 						</form>
 					</div>
 				</div>
@@ -157,7 +166,7 @@
 				$("#switch").change(function(){
 					var val = $("#switch").val();
 					if(val == "OUT"){
-						$("#popupBasic").popup("open");
+						$("#checkoutPopup").popup("open");
 					}else{
 						$("#checkinPopup").popup("open");
 					}

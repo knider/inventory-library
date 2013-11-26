@@ -1,16 +1,6 @@
 <?php
 	include(dirname(__FILE__).'/loader.php');
-	echo "<style>
-a.available:first-line
-{
-color: #009900;
-} 
 
-a.checked_out:first-line
-{
-color: #990000;
-} 
-</style>";
 
 	if($stmt = $mysqli->prepare("SELECT id, info, itemName, type, status, itemNumber, pages, os, features FROM item ORDER BY id DESC")){
 		$stmt->execute();
@@ -30,7 +20,7 @@ color: #990000;
 			//$statusColor = "#009900";
 		}
 
-			$string .= "<li><a class='". $statusClass ."'  href=item.php?itemnumber=".$itemNumber."&status=".$status.">".$itemName;
+			$string .= "<li><a class='". $statusClass ."'  href=item.php?itemnumber=".$itemNumber.">".$itemName."";
 			$string .= "<p>Item #: ".$itemNumber."</p>";
 			$string .= (!$type) ? "" : "<p>Type: ".$type."</p>";
 			$string .= (!$pages) ? "" : "<p>Pages: ".$pages."</p>";

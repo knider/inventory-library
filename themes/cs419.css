@@ -795,12 +795,16 @@ a.ui-link-inherit {
 }
 			
 /* additions */
-a.available > p:first-child
+/* a.available > p:first-child { color: #009900; } 
+a.checked_out > p:first-child { color: #990000; } */
+
+/* for index item list */
+a.available:first-line
 {
 color: #009900;
 } 
 
-a.checked_out > p:first-child
+a.checked_out:first-line
 {
 color: #990000;
 } 

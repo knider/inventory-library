@@ -1,8 +1,10 @@
 <?php
 	include(dirname(__FILE__).'/loader.php');
-
-
-	if($stmt = $mysqli->prepare("SELECT id, info, itemName, type, status, itemNumber, pages, os, features FROM item ORDER BY id DESC")){
+	session_start();
+	$user = $_SESSION['email'];
+	
+	if($stmt = $mysqli->prepare("SELECT id, info, itemName, type, status, itemNumber, pages, os, features FROM item WHERE user=? ORDER BY id DESC")){
+		if (!($stmt->bind_param('s', $user))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->bind_result($item_id, $info,$itemName,$type,$status,$itemNumber, $pages, $os, $features);
@@ -13,11 +15,9 @@
 		if($status == 1){
 			$statusString = "Checked Out";
 			$statusClass = "checked_out";
-			//$statusColor = "#990000";
 		}else {
 			$statusString = "Available";
 			$statusClass = "available";
-			//$statusColor = "#009900";
 		}
 
 			$string .= "<li><a class='". $statusClass ."'  href=item.php?itemnumber=".$itemNumber.">".$itemName."";

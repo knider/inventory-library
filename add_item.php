@@ -18,11 +18,11 @@
 	$pages = array_key_exists("pages", $_POST) ? '' : '';
 	
 	if( $itemNumber) {
-		if (!($stmt = $mysqli->prepare("INSERT INTO item(features, info, itemName, itemNumber, type, os, pages) values(?, ?, ?, ?, ?, ?, ?)"))) {
+		if (!($stmt = $mysqli->prepare("INSERT INTO item(features, info, itemName, itemNumber, type, os, pages, user) values(?, ?, ?, ?, ?, ?, ?,?)"))) {
 			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		
-		if (!($stmt->bind_param("sssssss", $features, $info, $itemName, $itemNumber, $type, $os, $pages))) {
+		if (!($stmt->bind_param("ssssssss", $features, $info, $itemName, $itemNumber, $type, $os, $pages, $email))) {
 			echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 
@@ -56,8 +56,7 @@
 				$( "#os-row" ).show();
 				$( "#pages" ).val("");
 				$( "#pages-row" ).hide();
-			}
-			else if ( $( "#type option:selected" ).val() == "book" )  {
+			} else if ( $( "#type option:selected" ).val() == "book" )  {
 				$( "#pages-row" ).show();
 				$( "#os" ).val("");
 				$( "#os-row" ).hide();
@@ -67,8 +66,6 @@
 				$( "#pages-row" ).hide();
 				$( "#os-row" ).hide();
 			}
-			
-			//
 		}
 		</script>
 		<div data-theme="a">

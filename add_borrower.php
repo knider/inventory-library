@@ -5,15 +5,15 @@
 	check_session();
 
 	$name = array_key_exists("name", $_POST) ? $_POST["name"] : '';
-	$email = array_key_exists("email", $_POST) ? $_POST["email"] : '';
+	$emailAddr = array_key_exists("email", $_POST) ? $_POST["email"] : '';
 	$address = array_key_exists("address", $_POST) ? $_POST["address"] : '';
 	$phone = array_key_exists("phone", $_POST) ? $_POST["phone"] : '';
 
 	if ($name) {
-		if ( !($stmt = $mysqli->prepare("INSERT INTO borrower(name,emailAddress,phoneNumber,streetAddress) values(?,?,?,?)") ) ) {
+		if (!($stmt = $mysqli->prepare("INSERT INTO borrower(name,emailAddress,phoneNumber,streetAddress,user) values(?,?,?,?,?)"))) {
 			echo "Prepare failed: (" . $mysqli->errno . ")" . $mysqli->error;
 		}
-		if ( !$stmt->bind_param('ssss', $name, $email, $phone, $address) ) { 
+		if (!$stmt->bind_param('sssss', $name, $emailAddr, $phone, $address, $email) ) { 
 			echo "Bind paramaters failed: (" . $mysqli->errno . ")" . $mysqli->error; 
 		}
 		if ( !$stmt->execute() ) { echo "Execute failed: (" . $mysqli->errno . ")" . $mysqli->error; }
@@ -22,8 +22,6 @@
 			exit();
 		}
 	}
-	
-	
 	
 	get_header();
 ?>

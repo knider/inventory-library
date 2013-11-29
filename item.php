@@ -79,10 +79,10 @@
 	if(!$itemNumber) { $itemNumber = array_key_exists("itemnumber", $_GET) ? $_GET["itemnumber"] : ""; }
 	
 	if( $itemNumber) {
-		if (!($stmt = $mysqli->prepare("SELECT id, features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ?"))) {
+		if (!($stmt = $mysqli->prepare("SELECT id, features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ? AND user=?"))) {
 			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
-		if (!($stmt->bind_param('s', $itemNumber))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
+		if (!($stmt->bind_param('ss', $itemNumber, $email))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
 		

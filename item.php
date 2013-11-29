@@ -8,58 +8,89 @@
 	include(dirname(__FILE__).'/loader.php');
 	check_session();
 	$title = "View Item";
-
+	
 	$itemNumber = array_key_exists("itemnum", $_POST) ? $_POST["itemnum"] : "";
+	$item_id = array_key_exists("item_id", $_POST) ? $_POST["item_id"] : "";
 	
 	$form = array_key_exists("form", $_POST) ? $_POST["form"] : "";
 	
-	if ($itemNumber && $form == "checkin") {
+	if ($itemNumber && $form == "checkin") { //check in
 		
+		//update item table
 		if (!($stmt = $mysqli->prepare("UPDATE item SET status=0 WHERE itemNumber= ?"))) {
-			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+			echo "Update Item Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		if (!($stmt->bind_param('s', $itemNumber))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
+		
+		$newstatus = "0";
+		
+		//get borrower ID
+		if (!($stmt = $mysqli->prepare("SELECT borrower_id FROM item_borrower WHERE item_id=? ORDER BY id DESC LIMIT 1"))) {
+			echo "Borrower Email Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+		}
+		if (!($stmt->bind_param('s', $item_id))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
+		
+		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
+		
+		if ( !$stmt->bind_result($borrower_id) ) {
+				echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error;
+		}
+		
+		$stmt->store_result();
+		
+		$stmt->fetch();
+		
+		//update history log
+		if($stmt = $mysqli->prepare("INSERT INTO item_borrower(status, item_id, borrower_id, user) VALUES(?, ?, ?, ?)")){
+			echo "Update History Log Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+		}
+		
+		if (!($stmt->bind_param('iiis', $newstatus, $item_id, $borrower_id, $email))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
+
+		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; }
 	
-	} else if ($itemNumber && $form == "checkout") {
+	} else if ($itemNumber && $form == "checkout") { // check out
 		
-		$name = array_key_exists("borrower_name", $_POST) ? $_POST["borrower_name"] : "";
-		$date = date("Ymd");
+		$borrower_id = array_key_exists("borrower_id", $_POST) ? $_POST["borrower_id"] : "";
+		$newstatus = "1";
 		
+		//update item
 		if (!($stmt = $mysqli->prepare("UPDATE item SET status=1 WHERE itemNumber= ?"))) {
-			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+			echo "Update Item Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		if (!($stmt->bind_param('s', $itemNumber))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
-	
-
-		if($stmt = $mysqli->prepare("INSERT INTO item_borrower(date, item_id, borrower_email) VALUES(?, (SELECT id FROM item WHERE itemNumber=?), (SELECT emailAddress FROM borrower WHERE name = ?))")){
-			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+		
+		//update history log
+		if($stmt = $mysqli->prepare("INSERT INTO item_borrower(status, item_id, borrower_id, user) VALUES(?, ?, ?, ?)")){
+			echo "Update History Log Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		
-		if (!($stmt->bind_param('sss', $date, $itemNumber, $name))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
+		if (!($stmt->bind_param('iiis', $newstatus, $item_id, $borrower_id, $email))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 
-		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
+		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; }
 	
 	} 
+	
 	//if it wasn't a POST, try to get the item number from a GET
 	if(!$itemNumber) { $itemNumber = array_key_exists("itemnumber", $_GET) ? $_GET["itemnumber"] : ""; }
 	
 	if( $itemNumber) {
-		if (!($stmt = $mysqli->prepare("SELECT features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ?"))) {
+		if (!($stmt = $mysqli->prepare("SELECT id, features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ?"))) {
 			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		if (!($stmt->bind_param('s', $itemNumber))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
 		
-		if ( !$stmt->bind_result($features, $info, $itemName, $type, $os, $pages, $status) ) {
+		if ( !$stmt->bind_result($item_id, $features, $info, $itemName, $type, $os, $pages, $status) ) {
 				echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error;
 		}
 		
-		else { //no problems
+		else { //no problems, show item details
 			$list_data = "<ul class=\"itemDetailList\">\n";
 			while($stmt->fetch()){
 				if ($itemName) $list_data .= "<li class=\"itemName\">".$itemName."</li>\n";
@@ -81,17 +112,19 @@
 		}
 		
 		//Get borrowers for checkout
-		if (!($stmt = $mysqli->prepare("SELECT name FROM borrower"))) {echo "Prepare failed: " .$stmt->errno." ".$stmt->error;}
+		if (!($stmt = $mysqli->prepare("SELECT id, name FROM borrower WHERE user=?"))) {echo "Prepare failed: " .$stmt->errno." ".$stmt->error;}
+		if (!$stmt->bind_param('s',$email)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
-		if (!$stmt->bind_result($name)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
+		if (!$stmt->bind_result($borrower_id, $name)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 		else {
 			$stmt->store_result();
-			$borrower_list = "<select name=\"borrower_name\">\n";
+			$borrower_list = "<select name=\"borrower_id\">\n";
 			while($stmt->fetch()){
-				$borrower_list .= "<option value=\"" .$name. "\">" .$name. "</option>\n";
+				$borrower_list .= "<option value=\"" .$borrower_id. "\">" .$name. "</option>\n";
 			}
 			$borrower_list .= "</select>\n";
 		}
+		
 	} else { //didn't have itemNumber
 		$list_data = "<p>No item number provided</p>";
 	}
@@ -143,8 +176,9 @@
 					<h3>Check OUT:</h3>
 					<div>
 						<form action="item.php?itemnumber=<?php echo $itemNumber; ?>" method="POST" data-ajax="false">
-						<input type="hidden" name="itemnum" id="itemnum" value="<?php echo $itemNumber; ?>" />
 						<input type="hidden" name="form" value="checkout" />
+						<input type="hidden" name="item_id" id="item_id" value="<?php echo $item_id; ?>" />
+						<input type="hidden" name="itemnum" id="itemnum" value="<?php echo $itemNumber; ?>" />
 						<?php echo $borrower_list; ?>
 						<input type="submit" value="Check Out" />
 						</form>
@@ -155,8 +189,9 @@
 					<a href="javascript: closein()" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 					<div>
 						<form action="item.php?itemnumber=<?php echo $itemNumber; ?>" method="POST" data-ajax="false">
-						<input type="hidden" name="itemnum" id="itemnum2" value="<?php echo $itemNumber; ?> "/>
 						<input type="hidden" name="form" value="checkin" />
+						<input type="hidden" name="item_id" id="item_id2" value="<?php echo $item_id; ?>" />
+						<input type="hidden" name="itemnum" id="itemnum2" value="<?php echo $itemNumber; ?> "/>
 						<input type="submit" value="Check In" />
 						</form>
 					</div>

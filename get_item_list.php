@@ -19,7 +19,6 @@
 			$statusString = "Available";
 			$statusClass = "available";
 		}
-
 			$string .= "<li><a class='". $statusClass ."'  href=item.php?itemnumber=".$itemNumber.">".$itemName."";
 			$string .= "<p>Item #: ".$itemNumber."</p>";
 			$string .= (!$type) ? "" : "<p>Type: ".$type."</p>";

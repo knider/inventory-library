@@ -40,7 +40,7 @@ function getAjax(pageDOM, website, newDOM){
 }
 
 
-//function gets the GET_ variables from the url
+//function gets the variables from the url
 //http://snipplr.com/view/19838/get-url-parameters/
 function getUrlVars() {
 	var map = {};

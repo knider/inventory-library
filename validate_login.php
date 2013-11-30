@@ -30,18 +30,19 @@ if(isset($_POST['email'], $_POST['password']))
 	$stmt->fetch();
 	if($stmt->num_rows == 1){
 		if($dbpassword == $password){
+			//success
 			$user_browser = $_SERVER['HTTP_USER_AGENT'];
 			$_SESSION['email'] = $dbemail;
-			echo $_SESSION['email'];
+			$_SESSION['string'] = sessionString($dbemail);
 		}
 		else{
+			//incorrect password
 			header('Location: login.php?login=1');
-			echo "incorrect password";
 		}
 	}
 	else{
+		//incorrect user
 		header('Location: login.php?login=2');
-		echo "user not found";
 	}
 	
 }

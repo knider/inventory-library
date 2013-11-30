@@ -38,10 +38,23 @@ function check_session(){
 	global $email;
 	if(isset($_SESSION['email'])){
 		$email = $_SESSION['email'];
+		if($_SESSION['string'] == sessionString($email)){
+			//success
+		}
+		else{
+		header('Location: login.php?login=0');
+		}
 	}
 	else{
 		header('Location: login.php?login=0');
 	}
+}
+
+//simple session protector, not very secure
+function sessionString($email){
+	$string;
+	$string = ($email * 5 + 30) ^ 4;
+	return $string;
 }
 
 function get_page_header(){

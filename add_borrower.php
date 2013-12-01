@@ -43,7 +43,10 @@
 				<div><label for="email">E-Mail:</label><input id="email" type="email" name="email" required /></div>
 				<div><label for="phone">Phone Number: </label><input class="phoneUS" id="phone" name="phone"></div>
 				<div><label for="address">Address:</label><input id="address" type="text" name="address" /></div>
-				<div><input type="submit" value="Add Borrower"/></div>
+				<div id="user buttons" class="ui-grid-a">
+					<div class="ui-block-a"><input type="reset" value="Clear All"/></div>
+					<div class="ui-block-b"><input type="submit" value="Add Borrower"/></div>
+				</div>
 			</form>
 			<script>$("#borrowerForm").validate();</script>
 		</div>                

@@ -109,6 +109,20 @@ function get_page_header(){
 		</div>';
 	}
 	
+	function get_history_menu(){
+		echo '<div id="mainbuttons" class="ui-grid-b">
+			<div class="ui-block-a">
+				<a href="javascript:submitForm()" data-icon="delete" data-ajax="false" data-role="button" data-mini="true">Clear All</a>
+				<p id="here1"></p>
+			</div>
+			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
+			</div>
+			<div class="ui-block-c">
+					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>		
+			</div>
+		</div>';
+	}
+	
 	function get_home_menu(){
 		echo '<div id="mainbuttons" class="ui-grid-b">
 			<div class="ui-block-a">

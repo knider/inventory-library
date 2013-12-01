@@ -5,7 +5,21 @@
 	check_session();
 	get_header();
 
+	if(array_key_exists("clear", $_POST))
+	{
+		if (!($stmt = $mysqli->prepare("TRUNCATE table item_borrower"))) {
+			echo "Prepare failed: (" . $mysqli->errno . ")" . $mysqli->error;
+		}
+		if ( !$stmt->execute() ) { echo "Execute failed: (" . $mysqli->errno . ")" . $mysqli->error; }
+	}
 ?>
+<script>
+
+function submitForm(){
+	document.getElementById("clearForm").submit();
+}
+
+</script>
 <body><div data-role="page" id="page5" data-theme="a">
 	<?php 
 	echo "
@@ -20,7 +34,7 @@
 
 	<div data-role="content">
 
-		<?php get_menu(); ?>
+		<?php get_history_menu(); ?>
 
 		<div id="itemstuff">
 			
@@ -59,9 +73,12 @@
 			
 			?>
 			</div>
-		
 		</div>
-	
+		<div>
+			<form id="clearForm" method="POST" action="history.php">
+				<input type="hidden" id="clear" value="clear" name="clear">
+			</form>
+		</div>
 	</div> <!-- /content -->
 </div> <!-- /page -->
 </body>

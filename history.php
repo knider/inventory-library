@@ -7,9 +7,10 @@
 
 	if(array_key_exists("clear", $_POST))
 	{
-		if (!($stmt = $mysqli->prepare("TRUNCATE table item_borrower"))) {
+		if (!($stmt = $mysqli->prepare("delete from item_borrower where user = ?"))) {
 			echo "Prepare failed: (" . $mysqli->errno . ")" . $mysqli->error;
 		}
+		if ( !$stmt->bind_param('s', $_SESSION['email']) ) { echo "Bind failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 		if ( !$stmt->execute() ) { echo "Execute failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 	}
 ?>

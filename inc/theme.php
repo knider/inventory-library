@@ -62,7 +62,7 @@ function get_page_header(){
 	global $subtitle;
 	$page_header = (!$title) ? SiteName : $title.' | '.SiteName;
 	if($subtitle)  echo '<div data-role="header"><a href="logout.php" data-ajax="false" data-role="button" data-mini="false" style="right: 5px; left: auto;">Logout</a>	<h1>'.$page_header.'</h1> <h3>'.$subtitle.'</h3></div>';
-	else echo '<div data-role="header"><a href="logout.php" data-ajax="false" data-role="button" data-mini="false" style="right: 5px; left: auto;">Logout</a><h1>'.$page_header.'</h1></div>';
+	else echo '<div data-role="header"><a href="logout.php" data-ajax="false" data-role="button" data-mini="true" style="right: 5px; left: auto;">Logout</a><h1>'.$page_header.'</h1></div>';
 
 }
 	

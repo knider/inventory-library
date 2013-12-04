@@ -61,8 +61,8 @@ function get_page_header(){
 	global $title;
 	global $subtitle;
 	$page_header = (!$title) ? SiteName : $title.' | '.SiteName;
-	if($subtitle)  echo '<div data-role="header"><h1>'.$page_header.'</h1> <h3>'.$subtitle.'</h3></div>';
-	else echo '<div data-role="header"><h1>'.$page_header.'</h1></div>';
+	if($subtitle)  echo '<div data-role="header"><a href="logout.php" data-ajax="false" data-role="button" data-mini="false" style="right: 5px; left: auto;">Logout</a>	<h1>'.$page_header.'</h1> <h3>'.$subtitle.'</h3></div>';
+	else echo '<div data-role="header"><a href="logout.php" data-ajax="false" data-role="button" data-mini="false" style="right: 5px; left: auto;">Logout</a><h1>'.$page_header.'</h1></div>';
 
 }
 	
@@ -70,30 +70,24 @@ function get_page_header(){
 	 * Output nav buttons
 	 */
 	function get_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-b">
+		echo '<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
 				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
 			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
-			</div>
-			<div class="ui-block-c">
-					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>
 			</div>
 		</div>';
 	}
 	
 	function get_item_menu(){
 		if(!$itemNumber) { $itemNumber = array_key_exists("itemnumber", $_GET) ? $_GET["itemnumber"] : ""; }
-		echo '<div id="mainbuttons" class="ui-grid-b">
+		echo '<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
 				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
 				<p id="here1"></p>
 			</div>
 			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
-			</div>
-			<div class="ui-block-c">
-					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>		
 			</div>
 		</div>
 		<div id="secondary buttons" class="ui-grid-a">
@@ -110,21 +104,19 @@ function get_page_header(){
 	}
 	
 	function get_history_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-b">
+		echo '<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
 				<a href="javascript:submitForm()" data-icon="delete" data-ajax="false" data-role="button" data-mini="true">Clear All</a>
 				<p id="here1"></p>
 			</div>
 			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
 			</div>
-			<div class="ui-block-c">
-					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>		
-			</div>
+			
 		</div>';
 	}
 	
 	function get_home_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-b">
+		echo '<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
 					<a href="add_item.php" data-role="button" data-mini="true">+ Item</a>
 					<p id="here3"></p>
@@ -133,9 +125,7 @@ function get_page_header(){
 					<a href="add_borrower.php" data-role="button" data-mini="true">+ Borrower</a>
 					<p id="here3"></p>
 			</div>
-			<div class="ui-block-c">
-					<a href="logout.php" data-ajax="false" data-role="button" data-mini="true">Logout</a>		
-			</div>
+			
 		</div>                
 		<div id="secondary buttons" class="ui-grid-a">
 			<div class="ui-block-a">

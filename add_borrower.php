@@ -37,14 +37,12 @@
 
 		<div data-theme="a">
 			<form id="borrowerForm" data-ajax="false" method="post" action="add_borrower.php">
-				<!--<input type="hidden" name="form" value="add_borrower">-->
 				<h3>Please Enter the New Borrower's Information and Submit</h3><br>
 				<div><label for="name">Name: </label><input id="name" name="name" type="text" required /></div>
 				<div><label for="email">E-Mail:</label><input id="email" type="email" name="email" required /></div>
 				<div><label for="phone">Phone Number: </label><input class="phoneUS" id="phone" name="phone"></div>
 				<div><label for="address">Address:</label><input id="address" type="text" name="address" /></div>
 				<div id="user buttons" class="ui-grid-a">
-					<div class="ui-block-a"><input type="reset" value="Clear All"/></div>
 					<div class="ui-block-b"><input type="submit" value="Add Borrower"/></div>
 				</div>
 			</form>

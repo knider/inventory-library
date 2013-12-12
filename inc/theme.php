@@ -12,7 +12,7 @@
 function get_header(){
 	global $title;
 	echo '<!DOCTYPE html>
-	<html lang="en_US">
+	<html lang="en">
 	<head>
 		<title>';
 	if (!$title) echo SiteName;
@@ -22,13 +22,13 @@ function get_header(){
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="themes/cs419.css" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
-		<link rel="stylesheet" href="jquery.mobile.popup.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.2.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.popup.css" />
 
-		<script src="jquery-1.10.2.min.js"></script>
-		<script src="jquery.mobile-1.3.2.min.js"></script>
-		<script src="jquery.validate.min.js"></script>
-		<script src="functions.js"></script>
+		<script src="scripts/jquery-1.10.2.min.js"></script>
+		<script src="scripts/jquery.mobile-1.3.2.min.js"></script>
+		<script src="scripts/jquery.validate.min.js"></script>
+		<script src="scripts/functions.js"></script>
 	</head>
 	';
 }
@@ -66,75 +66,63 @@ function get_page_header(){
 
 }
 	
-	/**
-	 * Output nav buttons
-	 */
-	function get_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-a">
-			<div class="ui-block-a">
-				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
-				<p id="here1"></p>
-			</div>
-			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
-			</div>
-		</div>';
-	}
+/**
+ * Output nav buttons
+ */
+function get_menu(){
+	echo '
+	<div id="mainbuttons" class="ui-grid-a">
+		<div class="ui-block-a">
+			<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
+		</div>
+		<div class="ui-block-b">
+			<a href="'.Home.'" data-icon="home" data-ajax="false" data-role="button" data-mini="true">Home</a>
+		</div>
+	</div>';
+}
 	
 	function get_item_menu(){
 		if(!$itemNumber) { $itemNumber = array_key_exists("itemnumber", $_GET) ? $_GET["itemnumber"] : ""; }
-		echo '<div id="mainbuttons" class="ui-grid-a">
+		get_menu();
+		echo '
+		<div id="secondary_buttons" class="ui-grid-a">
 			<div class="ui-block-a">
-				<a href="/" data-icon="back" data-ajax="false" data-role="button" data-rel="back" data-mini="true">Back</a>
-				<p id="here1"></p>
-			</div>
-			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
-			</div>
-		</div>
-		<div id="secondary buttons" class="ui-grid-a">
-			<div class="ui-block-a">
-					<a href="edit_item.php?itemNumber='.$itemNumber.'" data-ajax="false" data-role="button" data-mini="true">Edit Item</a>
-					<p id="here1">
-					</p>
+				<a href="edit_item.php?itemNumber='.$itemNumber.'" data-ajax="false" data-role="button" data-mini="true">Edit Item</a>
 			</div>
 			<div class="ui-block-b">
-				<a href="add_borrower.php" data-role="button" data-ajax="false" data-mini="true">+ Borrower</a>
-				<p id="here3"></p>
+				<a href="add_borrower.php" data-icon="plus" data-role="button" data-ajax="false" data-mini="true">+ Borrower</a>
 			</div>
 		</div>';
 	}
 	
 	function get_history_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-a">
+		echo '
+			<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
-				<a href="javascript:submitForm()" data-icon="delete" data-ajax="false" data-role="button" data-mini="true">Clear All</a>
-				<p id="here1"></p>
+				<a href="javascript:submitForm()" data-icon="delete" data-ajax="false" data-role="button" data-mini="true">Clear History</a>
 			</div>
-			<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-role="button" data-mini="true">Home</a>
+				<div class="ui-block-b"><a href="'.Home.'" data-ajax="false" data-icon="home" data-role="button" data-mini="true">Home</a>
 			</div>
 			
 		</div>';
 	}
 	
 	function get_home_menu(){
-		echo '<div id="mainbuttons" class="ui-grid-a">
+		echo '<script>$("#page1").on("pagechange", getAjax("page1", "get_item_list.php", "ulist"));</script>
+		<div id="mainbuttons" class="ui-grid-a">
 			<div class="ui-block-a">
-					<a href="add_item.php" data-role="button" data-mini="true">+ Item</a>
-					<p id="here3"></p>
+				<a href="add_item.php" data-icon="plus" data-role="button" data-mini="true">+ Item</a>
 			</div>
 			<div class="ui-block-b">
-					<a href="add_borrower.php" data-role="button" data-mini="true">+ Borrower</a>
-					<p id="here3"></p>
-			</div>
-			
+				<a href="add_borrower.php" data-icon="plus" data-role="button" data-mini="true">+ Borrower</a>
+			</div>	
 		</div>                
-		<div id="secondary buttons" class="ui-grid-a">
+		<div id="secondary_buttons" class="ui-grid-a">
 			<div class="ui-block-a">
-					<a href="checking.php" data-role="button" data-mini="true">Check In/Out</a>
-					<p id="here1">
-					</p>
+				<a href="checking.php" data-role="button" data-mini="true">Check In/Out</a>
 			</div>
 			<div class="ui-block-b">
-					<a href="history.php" data-role="button" data-ajax="false" data-mini="true">History</a>
+				<a href="history.php" data-role="button" data-ajax="false" data-mini="true">History</a>
 			</div>
 			
 		</div>';

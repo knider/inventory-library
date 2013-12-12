@@ -86,7 +86,6 @@
 				
 				<div><label for="info">Other Info: </label><input type="text" id="info" name="info"></div>
 				<div id="item buttons" class="ui-grid-a">
-					<div class="ui-block-a"><input type="reset" value="Clear All"/></div>
 					<div class="ui-block-b"><input type="submit" value="Add Item"/></div>
 				</div>			
 			</form>

@@ -5,10 +5,6 @@ include(dirname(__FILE__).'/loader.php');
 get_header();
 ?>
 <body>
-<script src="functions.js"></script>  
-<script language="javascript" type="text/javascript">
-</script>
-
 <script>
 /*
 Getting description of login attempt:
@@ -34,8 +30,7 @@ else if(status == 3)
 	
 	<div data-role="content" data-theme="a">
 
-		<div data-theme="a" id="error">
-		</div>
+		<div data-theme="a" id="error"> </div>
 		<div data-theme="a">
 			<form id="loginForm" data-ajax="false" method="post" action="validate_login.php">
 				<h3>Enter Email and Password</h3><br>
@@ -44,7 +39,8 @@ else if(status == 3)
 				<div><input type="submit" value="Login"/></div>
 			</form>
 			<script>$("#loginForm").validate();</script>
-		</div>                
+		</div>
+		<div><a style="float:right;" href="register.php" data-role="button" data-ajax="false" data-icon="info" data-inline="true">Register</a></div>
 
 		
 

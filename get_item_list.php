@@ -9,7 +9,7 @@
 		$stmt->store_result();
 		$stmt->bind_result($item_id, $info,$itemName,$type,$status,$itemNumber, $pages, $os, $features);
 		
-   		$string = "<ul id='ulist'  data-role='listview' data-inset='true' data-filter='true' data-filter-theme='a' data-filter-placeholder='Search for an Item'>";
+   		$string = "<ul id='ulist' data-role='listview' data-inset='true' data-filter='true' data-filter-theme='a' data-filter-placeholder='Search for an Item'>";
 		while($stmt->fetch()){
 		
 		if($status == 1){
@@ -28,7 +28,7 @@
 			$string .= (!$info) ? "" :  "<p>Other Info: ".$info."</p>";
 			$string .= "</a></li>";
 		}
-		$string .= "</ul>";
+		$string .= "</ul></div>";
 		echo $string;
 	}
 ?>

@@ -34,16 +34,9 @@ function get_header(){
 }
 
 function getNumberOfItems($email){
-	define('PATH', dirname(__FILE__));
-	
-	include_once(PATH . '/inc/config.php');
-		
-	$mysqli = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-	if ($mysqli->connect_errno){ 
-		echo "Connection Error " . $mysqli->connect_errno . " " . $mysqli->connect_error; 
-	}
+	global $mysqli;
 
-	if($stmt = $mysqli->prepare("SELECT * FROM item")){
+	if($stmt = $mysqli->prepare("SELECT COUNT(*) FROM item")){
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->fetch();
@@ -51,7 +44,7 @@ function getNumberOfItems($email){
 	}
 	$string = $numRows . " item(s)";
 	return $string;
-	}
+}
 
 function check_session(){
 	session_start();
@@ -134,7 +127,7 @@ function get_menu(){
 				<a href="add_item.php" data-icon="plus" data-role="button" data-mini="true">+ Item</a>
 			</div>
 			<div class="ui-block-b">
-				<a href="add_borrower.php" data-icon="plus" data-role="button" data-mini="true">+ Borrower</a>
+				<a href="add_borrower.php" data-icon="plus" data-ajax="false" data-role="button" data-mini="true">+ Borrower</a>
 			</div>	
 		</div>                
 		<div id="secondary_buttons" class="ui-grid-a">
@@ -144,8 +137,25 @@ function get_menu(){
 			<div class="ui-block-b">
 				<a href="history.php" data-role="button" data-ajax="false" data-mini="true">History</a>
 			</div>
-			
 		</div>';
 	}
 	
+	//Retrieve borrower list to display in select menu
+	function get_borrower_list($borrower_list) {
+		global $mysqli;
+		global $email;
+		if (!($stmt = $mysqli->prepare("SELECT id, name FROM borrower WHERE user=?"))) {echo "Prepare failed: " .$stmt->errno." ".$stmt->error;}
+		if (!$stmt->bind_param('s',$email)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
+		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
+		if (!$stmt->bind_result($borrower_id, $name)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
+		else {
+			$stmt->store_result();
+			$borrower_list .= "<select name=\"borrower_id\">\n";
+			while($stmt->fetch()){
+				$borrower_list .= "<option value=\"" .$borrower_id. "\">" .$name. "</option>\n";
+			}
+			$borrower_list .= "</select>\n";
+		}
+	}
+
 ?>

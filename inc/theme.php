@@ -122,19 +122,14 @@ function get_menu(){
 	
 	function get_home_menu(){
 		echo '<script>$("#page1").on("pagechange", getAjax("page1", "get_item_list.php", "ulist"));</script>
-		<div id="mainbuttons" class="ui-grid-a">
+		<div id="mainbuttons" class="ui-grid-b">
 			<div class="ui-block-a">
 				<a href="add_item.php" data-icon="plus" data-role="button" data-mini="true">+ Item</a>
 			</div>
 			<div class="ui-block-b">
 				<a href="add_borrower.php" data-icon="plus" data-ajax="false" data-role="button" data-mini="true">+ Borrower</a>
 			</div>	
-		</div>                
-		<div id="secondary_buttons" class="ui-grid-a">
-			<div class="ui-block-a">
-				<a href="checking.php" data-role="button" data-mini="true">Check In/Out</a>
-			</div>
-			<div class="ui-block-b">
+			<div class="ui-block-c">
 				<a href="history.php" data-role="button" data-ajax="false" data-mini="true">History</a>
 			</div>
 		</div>';

@@ -1,6 +1,5 @@
 <?php
 	include(dirname(__FILE__).'/loader.php');
-	session_set_cookie_params(60);
 	check_session();
 	$title = "";
 	$subtitle = getNumberOfItems($email);

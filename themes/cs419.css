@@ -799,6 +799,10 @@ a.ui-link-inherit {
 /* a.available > p:first-child { color: #009900; } 
 a.checked_out > p:first-child { color: #990000; } */
 
+/* To fix title cutoff */
+.ui-title {
+    margin: 0.6em 10% 0.8em !important;
+}
 
 
 /* for index item list */

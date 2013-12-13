@@ -11,6 +11,7 @@ Getting description of login attempt:
 status 0 means user attempted to load index without logging in
 status 1 means invalid password
 status 2 means invalid email
+status 3 means logged out
 */
 $(document).ready(function(){
 var status = getUrlVars()["login"];

@@ -36,7 +36,8 @@ function get_header(){
 function getNumberOfItems($email){
 	global $mysqli;
 
-	if($stmt = $mysqli->prepare("SELECT COUNT(*) FROM item")){
+	if($stmt = $mysqli->prepare("SELECT * FROM item where user=?")){
+		$stmt->bind_param('s', $email);
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->fetch();

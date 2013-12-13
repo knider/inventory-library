@@ -5,9 +5,9 @@
 	*	File Name: item.php
 	*	Description: This will show the details of an item
 	*  ================================================================= */
+	$title = "View Item";
 	include(dirname(__FILE__).'/loader.php');
 	check_session();
-	$title = "View Item";
 	
 	$itemNumber = array_key_exists("itemnum", $_POST) ? $_POST["itemnum"] : "";
 	$item_id = array_key_exists("item_id", $_POST) ? $_POST["item_id"] : "";
@@ -79,7 +79,7 @@
 	if(!$itemNumber) { $itemNumber = array_key_exists("itemnumber", $_GET) ? $_GET["itemnumber"] : ""; }
 	
 	if( $itemNumber) {
-		if (!($stmt = $mysqli->prepare("SELECT id, features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ? AND user=?"))) {
+		if (!($stmt = $mysqli->prepare("SELECT id, features, info, itemName, type, os, pages, status FROM item WHERE itemNumber = ? AND user=? LIMIT 1"))) {
 			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		if (!($stmt->bind_param('ss', $itemNumber, $email))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
@@ -106,12 +106,13 @@
 				} else {
 					$statusString = "Available";
 				}
-				$list_data .= "<li class=\"itemStatus\">".$statusString."</li>\n";
 			}
 			$list_data .= "</ul>\n";
 		}
 		
 		//Get borrowers for checkout
+		get_borrower_list($borrower_list);
+		/*
 		if (!($stmt = $mysqli->prepare("SELECT id, name FROM borrower WHERE user=?"))) {echo "Prepare failed: " .$stmt->errno." ".$stmt->error;}
 		if (!$stmt->bind_param('s',$email)) { echo "Binding result failed: (" . $mysqli->errno . ")" . $mysqli->error; }
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
@@ -123,7 +124,7 @@
 				$borrower_list .= "<option value=\"" .$borrower_id. "\">" .$name. "</option>\n";
 			}
 			$borrower_list .= "</select>\n";
-		}
+		}*/
 		
 	} else { //didn't have itemNumber
 		$list_data = "<p>No item number provided</p>";

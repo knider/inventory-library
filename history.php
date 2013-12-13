@@ -17,7 +17,9 @@
 <script>
 
 function submitForm(){
-	document.getElementById("clearForm").submit();
+	if (confirm('Are you sure you wish to clear all item history?')) {
+		document.getElementById("clearForm").submit();
+    }
 }
 
 </script>

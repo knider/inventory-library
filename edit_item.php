@@ -19,6 +19,7 @@
 	$os = array_key_exists("os", $_POST) ? $_POST["os"] : '';
 	$pages = array_key_exists("pages", $_POST) ? '' : '';
 	$itemNumber = array_key_exists("itemNumber", $_GET) ? $_GET["itemNumber"] : "";
+	echo $itemNumber;
 	$num = array_key_exists("itemNumber", $_POST) ? $_POST["itemNumber"] : array_key_exists("itemNumber", $_GET) ? $_GET["itemNumber"] : "";
 	$msg = "";
 	if(!$num) {
@@ -68,7 +69,7 @@
 <body>
 <div data-role="page" id="page3" data-theme="a">
 	<?php get_page_header(); ?>
-	
+	<?php echo $itemNumber; ?>
 	<div data-role="content" data-theme="a">
 		
 		<?php get_menu(); ?>

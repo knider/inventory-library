@@ -19,21 +19,21 @@
 	$os = array_key_exists("os", $_POST) ? $_POST["os"] : '';
 	$pages = array_key_exists("pages", $_POST) ? '' : '';
 	$itemNumber = array_key_exists("itemNumber", $_GET) ? $_GET["itemNumber"] : "";
-	echo $itemNumber;
 	$num = array_key_exists("itemNumber", $_POST) ? $_POST["itemNumber"] : array_key_exists("itemNumber", $_GET) ? $_GET["itemNumber"] : "";
 	$msg = "";
 	if(!$num) {
 		$msg .= "<div id='error-box'>No item selected</div>";
 	}
 	
+
 	//If the form was submitted...
 	if(array_key_exists("form", $_POST)) {
 		if (!($stmt = $mysqli->prepare("UPDATE item SET features=?, info=?, itemName=?, itemNumber=?, type=?, os=?, pages=? WHERE user=? && itemNumber=?"))) {
 			echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
 		}
 		
-		if (!($stmt->bind_param("ssssssss", $features, $info, $itemName, $newItemNumber, $type, $os, $pages, $email, $num))) {
-			echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
+		if (!$stmt->bind_param("sssssssss", $features, $info, $itemName, $newItemNumber, $type, $os, $pages, $email, $num)) {
+			echo "Bind failsadfed: "  . $stmt->errno . " " . $stmt->error;
 		}
 
 		if (!$stmt->execute()){ echo "Execute failed: "  . $stmt->errno . " " . $stmt->error; } 
@@ -69,7 +69,6 @@
 <body>
 <div data-role="page" id="page3" data-theme="a">
 	<?php get_page_header(); ?>
-	<?php echo $itemNumber; ?>
 	<div data-role="content" data-theme="a">
 		
 		<?php get_menu(); ?>
@@ -113,7 +112,7 @@
 				<div><label for="features">Features: </label><input type="text" id="features" name="features" value="<?php echo $features; ?>"></input></div>
 				
 				<div><label for="info">Other Info: </label><input type="text" id="info" name="info" value="<?php echo $info; ?>"></input></div>
-				<input type="hidden" name="form" value="edit_item" />
+				<input type="hidden" name="form" value="edit_item" id="form"/>
 				<div><input type="submit" value="Edit Item"/></div>
 			</form>
 			<script>$("#itemEditForm").validate();</script>

@@ -3,6 +3,7 @@
 	session_start();
 	$user = $_SESSION['email'];
 	
+	
 	if($stmt = $mysqli->prepare("SELECT id, info, itemName, type, status, itemNumber, pages, os, features FROM item WHERE user=? ORDER BY id DESC")){
 		if (!($stmt->bind_param('s', $user))) { echo "Bind failed: "  . $stmt->errno . " " . $stmt->error; }
 		$stmt->execute();

@@ -3,7 +3,7 @@
 	session_set_cookie_params(60);
 	check_session();
 	$title = "";
-	$subtitle = $email;
+	$subtitle = getNumberOfItems($email);
 	get_header();
 ?>
 

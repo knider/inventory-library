@@ -33,6 +33,26 @@ function get_header(){
 	';
 }
 
+function getNumberOfItems($email){
+	define('PATH', dirname(__FILE__));
+	
+	include_once(PATH . '/inc/config.php');
+		
+	$mysqli = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+	if ($mysqli->connect_errno){ 
+		echo "Connection Error " . $mysqli->connect_errno . " " . $mysqli->connect_error; 
+	}
+
+	if($stmt = $mysqli->prepare("SELECT * FROM item")){
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->fetch();
+		$numRows = $stmt->num_rows;
+	}
+	$string = $numRows . " item(s)";
+	return $string;
+	}
+
 function check_session(){
 	session_start();
 	global $email;
